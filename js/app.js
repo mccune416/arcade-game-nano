@@ -41,7 +41,7 @@ var Player = function(x,y) {
 };
 
 Player.prototype.update = function() {
-  // Makes sure the player object doesn't walk off the screen
+    // Makes sure the player object doesn't walk off the screen
     if (this.y <= -6) {
       this.y = 404;
       this.x = 202;
