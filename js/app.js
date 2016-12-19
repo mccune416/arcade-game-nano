@@ -17,7 +17,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += this.speed * dt
+    this.x += this.speed * dt;
 
     if (this.x >= 505) {
       this.x = -101;
@@ -35,59 +35,55 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(x,y) {
-  this.sprite = 'images/char-boy.png';
-  this.x = x;
-  this.y = y;
+    this.sprite = 'images/char-boy.png';
+    this.x = x;
+    this.y = y;
 };
 
 Player.prototype.update = function() {
-  checkBoundaries(this);
+  // Makes sure the player object doesn't walk off the screen
+    if (this.y <= -6) {
+      this.y = 404;
+      this.x = 202;
+    }
+    if (this.x > 404) {
+      this.x = 404;
+    }
+    if (this.x < 0) {
+      this.x = 0;
+    }
+    if (this.y > 404) {
+      this.y = 404;
+    }
 };
 
 Player.prototype.render = function() {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(keyInput) {
-  if (keyInput == "up") {
-    this.y -= 41;
-  }
-  if (keyInput == "down") {
-    this.y += 41;
-  }
-  if (keyInput == "left") {
-    this.x -= 50.5;
-  }
-  if (keyInput == "right") {
-    this.x += 50.5;
-  }
+    if (keyInput == "up") {
+      this.y -= 41.5;
+    }
+    if (keyInput == "down") {
+      this.y += 41.5;
+    }
+    if (keyInput == "left") {
+      this.x -= 50.5;
+    }
+    if (keyInput == "right") {
+      this.x += 50.5;
+    }
 };
 
 var checkCollision = function(enemy) {
-  // Resets the player object to its original position if the enemy and player collide
-  if (player.x >= enemy.x - 65
-      && player.x <= enemy.x + 65
-      && player.y >= enemy.y - 50
-      && player.y <= enemy.y + 50) {
-    player.y = 404;
-    player.x = 202;
-  }
-};
-
-var checkBoundaries = function(player) {
-  // Makes sure the player object doesn't walk off the screen
-  if (player.y <= -6) {
-    player.y = 404;
-    player.x = 202;
-  }
-  if (player.x > 404) {
-      player.x = 404;
-  }
-  if (player.x < 0) {
-      player.x = 0;
-  }
-  if (player.y > 404) {
-      player.y = 404;
+    // Resets the player object to its original position if the enemy and player collide
+    if (player.x >= enemy.x - 65
+        && player.x <= enemy.x + 65
+        && player.y >= enemy.y - 50
+        && player.y <= enemy.y + 50) {
+          player.y = 404;
+          player.x = 202;
   }
 };
 
